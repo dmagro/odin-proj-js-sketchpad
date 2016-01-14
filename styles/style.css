@@ -50,14 +50,14 @@ h2{
 	text-align: center;
 }
 
-#grid-button{
-	background-color: #ea4335;
-}
-
 #reset-button{
 	background-color: #009f6a;
 }
 
 #silly-button{
 	background-color: #4285F4;
+}
+
+#shadow-button{
+	background-color: #ea4335;
 }

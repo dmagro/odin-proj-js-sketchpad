@@ -7,7 +7,7 @@ var cellWidth = 10;
 var cellHeight = 10;
 
 var isSilly = false;
-//var wantGrid = true;
+var isShadow = false;
 
 var colors=["#009f6a","#4285F4","#ea4335","#fbbc05"];
 
@@ -20,9 +20,9 @@ $(document).ready(function() {
 		var isValid = getNewDimensions();
 		if(isValid){
 			$("#container").remove();
-			getNewCellDimensions();
 			isSilly = false;
-			wantGrid = true;
+			isShadow = false;
+			removeShadowMode();
 			setupGrid();
 		}
 		else{
@@ -32,26 +32,26 @@ $(document).ready(function() {
 
 	$("#silly-button").click(function() {
 		isSilly = !isSilly;
+		if(isShadow){
+			removeShadowMode();
+			isShadow = false;
+		}
 	});
 
-	/*$("#grid-button").click(function() {
-		wantGrid = !wantGrid;
-		var boderValue = "";
-		if(wantGrid){
-			boderValue = "1px solid black";
-		}
-		else{
-			boderValue = "none";
-		}
-		$(".cell").css("border", boderValue);
-	});*/
+	$("#shadow-button").click(function() {
+		isShadow = !isShadow;
+		if(isShadow)
+			$(".cell").css("background-color","black");
+		if(isSilly)
+			isSilly = false;
+	});
 });
 
 function addMenu() {
 	$("body").append("<div id='menu'></div>");
-	//$("#menu").append("<div class='button' id='grid-button'>Grid</div>")
 	$("#menu").append("<div class='button' id='reset-button'>Reset</div>");
-	$("#menu").append("<div class='button' id='silly-button'>Silly</div>");
+	$("#menu").append("<div class='button' id='silly-button'>Silly Mode</div>");
+	$("#menu").append("<div class='button' id='shadow-button'>Shadow Mode</div>");
 }
 
 function setupGrid() {
@@ -71,9 +71,12 @@ function setupCells() {
 		}
 	}
 
-	$(".cell").hover(function() {
+	$(".cell").mouseenter(function() {
 		if(isSilly) {
 			$(this).css("background-color", colors[Math.floor(Math.random() * colors.length)]);
+		}
+		else if(isShadow) {
+			$(this).css("opacity", $(this).css("opacity") - 0.1);
 		}
 		else {
 			$(this).css("background-color", "black");
@@ -103,4 +106,9 @@ function getNewDimensions() {
 	}
 
 	return false;
+}
+
+function removeShadowMode(){
+	$(".cell").css("background-color","white");
+	$(".cell").css("opacity", 1);
 }
