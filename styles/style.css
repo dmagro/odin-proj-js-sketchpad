@@ -1,0 +1,27 @@
+#container{
+	height: 160px;
+    width: 160px;
+    margin: 0 auto;
+}
+
+.cell{
+    height: 10px;
+    width: 10px;
+    background-color: white;
+    border: 1px solid black;
+    display: inline-block;
+    float: left;
+}
+
+#clear-button{
+	display: inline-block;
+	background-color: #009f6a;
+	padding: 5px 10px 5px 10px;
+	border-radius: 1px;
+	text-align: center;
+}
+
+#clear-button a {
+	color: white;
+	text-decoration: none;
+}
